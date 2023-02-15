@@ -1,0 +1,68 @@
+#node name (must be exactly the same name)
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_trajectory_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+    
+    #broadcaste the state
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+  
+    #joint_trajectory_controller:
+    #  type: joint_trajectory_controller/JointTrajectoryController
+
+    forward_position_controller:
+      type: forward_command_controller/ForwardCommandController
+    forward_vilocity_controller:
+      type: forward_command_controller/ForwardCommandController
+    
+
+#configurations for the controller
+joint_trajectory_controller:
+  ros__parameters:
+    joints:
+      - crutch_joint__imu_position
+    interface_name: position          #angles
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity #not needed?
+
+
+forward_position_controller:
+  ros__parameters:
+    joints:
+      - crutch_joint__imu_position #joint the controller will control
+    interface_name: position       #same name as defined in the sdf/urdf file
+    command_interfaces:
+      - position                   # 
+    state_interfaces:
+      - position
+      - velocity
+
+forward_vilocity_controller:
+  ros__parameters:
+    joints:
+      - crutch_joint__imu_position
+    interface_name: velocity
+    command_interfaces:
+      - velocity
+    state_interfaces:
+      - velocity
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
